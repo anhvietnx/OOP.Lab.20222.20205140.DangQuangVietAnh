@@ -1,0 +1,80 @@
+* QUESTION 1 : Try to add a method addDigitalVideoDisc which allows to pass an arbitrary number of
+	arguments for dvd. Compare to an array parameter. What do you prefer in this case?
+* ANSWER: I will show 2 method , from 2 method , we see that , if we use the method addDigitalVideoDisc(DigitalVideoDisc[] dvdList), it only accept array , but when we use the method
+		  public void addDigitalVideoDisc(DigitalVideoDisc... dvds), we can pass one argument , many arguments or array 
+		  => So i prefer the method 2 , it is more useful !
+
+		public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+			int totalDiscsToAdd = dvdList.length;
+			int spaceAvailable = MAX_NUMBERS_ORDERED - qtyOrdered;
+
+			if (totalDiscsToAdd > spaceAvailable) {
+				System.out.println("Not enough space in the cart to add all the discs.");
+				System.out.println("Please remove some discs before adding more.");
+				return;
+			}
+
+			for (int i = 0; i < totalDiscsToAdd; i++) {
+				if (qtyOrdered >= MAX_NUMBERS_ORDERED) {
+					System.out.println("The cart is full.");
+					break;
+				}
+
+				itemsOrdered[qtyOrdered] = dvdList[i];
+				qtyOrdered++;
+				System.out.println("The disc  has been added.");
+			}
+
+			System.out.println("Current number of discs in the cart: " + qtyOrdered);
+		}
+		
+		
+		
+		//add by n arbitrary , this what is include addDigitalVideoDisc(DigitalVideoDisc[] dvdList , we only need this
+		public void addDigitalVideoDisc(DigitalVideoDisc... dvds) {
+			int totalDiscsToAdd = dvds.length;
+			int spaceAvailable = MAX_NUMBERS_ORDERED - qtyOrdered;
+
+			if (totalDiscsToAdd > spaceAvailable) {
+				System.out.println("Not enough space in the cart to add all the discs.");
+				System.out.println("Please remove some discs before adding more.");
+				return;
+			}
+
+			for (int i = 0; i < totalDiscsToAdd; i++) {
+				if (qtyOrdered >= MAX_NUMBERS_ORDERED) {
+					System.out.println("The cart is full.");
+					break;
+				}
+
+				itemsOrdered[qtyOrdered] = dvds[i];
+				qtyOrdered++;
+				System.out.println("The disc " + dvds[i].getTitle() +" has been added.");
+			}
+
+			System.out.println("Current number of discs in the cart: " + qtyOrdered);
+		}
+
+
+*QUESTION 2: Is JAVA a Pass by Value or a Pass by Reference programming language?
+*ANSWER: 
+	JAVA is always a pass by value programming language. When you pass an object to a method,
+	a copy of the reference to the object is created and passed into the method. 
+	When you change the value of a parameter in a method, you are actually only changing the value of the reference copy,
+	not the value of the original reference.
+ 
+ *QUESTION 3 : Please write a swap() method that can correctly swap the two objects.
+ *ANSWER : we can use array to do this task ,  because of the difference in how Java passes arguments to objects and arrays.
+	when passes an object into a method, the object's reference is copied and points to a new copy in the method.
+	Any changes made on the reference within the method only affect the copy of the reference, not the original reference outside the method.
+
+	Whereas, when passing an array to a method, the array's reference is also copied, 
+	but both the reference and the array's elements point to the same memory area. 
+	Any changes made to the reference or array elements within the method will reflect directly to the original array outside the method.
+	
+	public static void swapp_active(DigitalVideoDisc[] disc ,int index1,int index2) {
+		DigitalVideoDisc tmp = disc[index1];
+		disc[index1] = disc[index2];
+		disc[index2] = tmp;
+		
+	}
