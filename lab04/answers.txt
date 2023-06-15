@@ -1,0 +1,91 @@
+QUESTION : Alternatively, to compare items in the cart, instead of using Comparator, we can use the
+Comparable interface and override the compareTo()method. You can refer to the Java docs to see the
+information of this interface.
+Suppose we are taking this Comparable interface approach.
+1. What class should implement the Comparable interface?
+	ANSWER :  To implement the Comparable interface for comparing items in the cart, the class that should implement the 
+	Comparable interface is the class representing the items in the cart. 
+	In this case, it would be the "Media" class.
+	By implementing the Comparable interface in the Media class, you can override the compareTo() method to define the comparison logic based on your requirements.
+	This allows you to customize how the items in the cart are compared and sorted.
+	
+	Here's an example of how the Media class can implement the Comparable interface:
+
+		public class Media implements Comparable<Media> {
+		// Rest of the class code
+		
+		@Override
+		public int compareTo(Media otherMedia) {
+			// Compare the current media object with the otherMedia object and return the result
+			// Return a negative value if the current media should be sorted before otherMedia
+			// Return a positive value if the current media should be sorted after otherMedia
+			// Return 0 if both media objects are considered equal in terms of sorting
+			
+			// Implement the comparison logic based on your requirements
+			
+			// For example, compare by title:
+			return this.getTitle().compareTo(otherMedia.getTitle());
+		}
+		
+		// Rest of the class code
+	}
+	
+	CONCLUSION :  With this implementation, you can now compare and sort instances of the Media class using the natural ordering defined in the compareTo() method.
+ 2. In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+	ANSWER : To reflect the desired ordering in the compareTo() method of the Media class, 
+	you need to define the comparison logic based on the specific attributes or properties of the media items.
+	Here are some examples of how you could implement the compareTo() method in the relevant classes to reflect different ordering criteria:
+	* Ordering by Title:
+		public class Media implements Comparable<Media> {
+			// Rest of the class code
+			
+			@Override
+			public int compareTo(Media otherMedia) {
+				return this.getTitle().compareTo(otherMedia.getTitle());
+			}
+			
+			// Rest of the class code
+			}
+	
+	*Ordering by Cost (in ascending order):
+		public class Media implements Comparable<Media> {
+			// Rest of the class code
+			
+			@Override
+			public int compareTo(Media otherMedia) {
+				return Float.compare(this.getCost(), otherMedia.getCost());
+			}
+			
+			// Rest of the class code
+		}
+	
+	* Ordering by Length (for DVDs and CDs):
+		public class DigitalVideoDisc extends Disc implements Playable, Comparable<DigitalVideoDisc> {
+			// Rest of the class code
+			
+			@Override
+			public int compareTo(DigitalVideoDisc otherDisc) {
+				return Integer.compare(this.getLength(), otherDisc.getLength());
+			}
+			
+			// Rest of the class code
+			}
+
+		public class CompactDisc extends Disc implements Playable, Comparable<CompactDisc> {
+			// Rest of the class code
+			
+			@Override
+			public int compareTo(CompactDisc otherCD) {
+				return Integer.compare(this.getLength(), otherCD.getLength());
+			}
+			
+			// Rest of the class code
+		}
+
+3. Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+	ANSWER : No, the Comparable interface in Java is designed to provide a natural ordering for objects based on a single set of criteria. 
+	It allows you to define the default ordering for objects of a class by implementing the compareTo() method, but it does not support multiple ordering rules.
+	If you need to have multiple ordering rules for your items (e.g., ordering by title and then by cost, or vice versa), you can consider using the Comparator interface instead.
+	The Comparator interface allows you to define multiple comparison rules by implementing the compare() method in a separate class or using lambda expressions.
+	
+	CONCLUSION : Comparable not  do this task , we must use Comparable to do this ( I do this in the code , file name is : "MediaComparatorByCostTitle" and "MediaComparatorByTitleCost"
